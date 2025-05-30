@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+//int __io_putchar(int ch);
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -94,7 +94,7 @@ int main(void)
   MX_SPI1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-
+uint8_t* pdata = "Hello World";
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,7 +102,8 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+	  HAL_UART_Transmit(&huart2, pdata, sizeof(pdata), 100);
+	  //printf("Hello World\n");
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -361,7 +362,17 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+#if 0
+int __io_putchar(int ch)
+{
+	HAL_StatusTypeDef hStat;
+	hStat = HAL_UART_Transmit(&huart2, (uint8_t*)&ch, 1, 100);
+	if(hStat == HAL_OK)
+		return 1;
+	else
+		return 0;
+}
+#endif
 /* USER CODE END 4 */
 
 /**
